@@ -60,7 +60,7 @@ def array_to_binaryarray(src_array, depth_limit, nodata, new_nodata):
 	columns = src_array.shape[1]
 
 	# Create new array with (filled with nodata as default):
-	dest_array = numpy.full((src_array.shape[0], src_array.shape[1]), new_nodata, dtype = numpy.int16, order = 'C')
+	dest_array = numpy.full((src_array.shape[0], src_array.shape[1]), new_nodata, dtype = numpy.int16, order = "C")
 
 	# Loop trough cells:
 	for i in range(rows):
@@ -76,7 +76,7 @@ def array_to_binaryarray(src_array, depth_limit, nodata, new_nodata):
 
 
 #
-# Returns a new NumPy array with 'no go' areas buffered by 1 cell in all directions.
+# Returns a new NumPy array with "no go" areas buffered by 1 cell in all directions.
 # Cell data type is 16-bit integer.
 #
 def buffer_shoals(src_array, new_nodata):
@@ -84,7 +84,7 @@ def buffer_shoals(src_array, new_nodata):
 	columns = src_array.shape[1]
 
 	# Create new array with identical dimensions (filled with ones as default):
-	dest_array = numpy.full((src_array.shape[0], src_array.shape[1]), 1, dtype = numpy.int16, order = 'C')
+	dest_array = numpy.full((src_array.shape[0], src_array.shape[1]), 1, dtype = numpy.int16, order = "C")
 
 	# Calculate max indexes:
 	colmax = columns - 1
@@ -164,7 +164,7 @@ def buffer_shoals(src_array, new_nodata):
 
 
 #
-# Creates and returns a 'Coin'.
+# Creates and returns a "Coin".
 # Coin is a boolean 2D array. Extreme edges are trimmed for better results.
 #
 def create_coin(radius):
@@ -201,7 +201,7 @@ def roll_coin(src_array, dest_array, coin, radius, nodata, valdco):
 	columns = src_array.shape[1]
 	isclean = False
 
-	# Start 'rolling':
+	# Start "rolling":
 	try:
 		for i in range(rows):
 			for j in range(columns):
@@ -262,7 +262,7 @@ def main(path, outpath, contourpath):
 		data_array = numpy.array(data.GetRasterBand(1).ReadAsArray())
 
 		# Create new array to hold all contour limits:
-		dest_array = numpy.full((data_array.shape[0], data_array.shape[1]), 0, dtype = numpy.int16, order = 'C')
+		dest_array = numpy.full((data_array.shape[0], data_array.shape[1]), 0, dtype = numpy.int16, order = "C")
 
 	except Exception:
 		print "Error reading the input data. Exiting."
@@ -354,8 +354,8 @@ def filter_contours(raw_contourpath, export_contourpath):
 	try:
 		import geopandas as gpd
 		data = gpd.read_file(raw_contourpath)
-		data['VALDCO'] = data['VALDCO'].astype('int')
-		product_contours = data.loc[data['VALDCO'].isin([3, 6, 10, 13, 15, 20, 30, 50, 100, 200, 500])] # FTA Production contours
+		data["VALDCO"] = data["VALDCO"].astype("int")
+		product_contours = data.loc[data["VALDCO"].isin([3, 6, 10, 13, 15, 20, 30, 50, 100, 200, 500])] # FTA Production contours
 		product_contours.to_file(export_contourpath)
 	except Exception:
 		print "\nContour filtering failed. Raw contours still available:", raw_contourpath
