@@ -165,7 +165,8 @@ def buffer_shoals(src_array, new_nodata):
 
 #
 # Creates and returns a "Coin".
-# Coin is a boolean 2D array. Extreme edges are trimmed for better results.
+# Coin is a boolean 2D array and can be of any shape.
+# In this version the coin is approx. round, extreme edges are trimmed for better results.
 #
 def create_coin(radius):
     y, x = numpy.mgrid[-radius : radius + 1, -radius : radius + 1]
@@ -177,7 +178,7 @@ def create_coin(radius):
 # Returns either TRUE or FALSE, depending on the cells tested
 # Cell to be tested is always in the middle of the coin.
 #
-# MISSING: Corners, top & bottom rows (due to edge effects, pad depth models with no data to avoid / develop behaviour on edges).
+# MISSING: Corners, top & bottom rows and extreme columns (due to edge effects, pad depth models with no data to avoid / develop behaviour on edges).
 #
 def check_coin(coin, radius, array, index_row, index_col, rows, columns):
     if(index_row >= radius and index_row <= (rows-radius-1) and index_col >= radius and index_col <= (columns-radius-1)): # Inside array:
@@ -249,7 +250,10 @@ def main(path, outpath, contourpath):
     # Contour list (current FTA production contours):
     contour_list = [3, 6, 10, 13, 15, 20, 30, 50, 100, 200, 500]
 
-    # Read in data and get original nodata value and depth min/max:
+
+    #
+    # # Read in the data and get original nodata value and depth min/max:
+    #
     try:
         data = gdal.Open(path, GA_ReadOnly)
         band = data.GetRasterBand(1)
@@ -269,19 +273,20 @@ def main(path, outpath, contourpath):
         exit()
 
 
-    # Create Coin:
+    #
+    # # Create Coin:
+    #
     try:
-        coin_radius = 10 # Promising results using radius of 10 and 5m spatial resolution
+        coin_radius = 10 # Promising initial results using radius of 10 and 5m spatial resolution
         coin = create_coin(coin_radius)
     except Exception:
         print "Error in Coin creation. Exiting."
         exit()
 
 
-    # # # # # # # # # # # # # # # # # # #
-    #       Start rolling the coin:     #
-    # # # # # # # # # # # # # # # # # # #
-
+    #
+    # # Start rolling the coin:
+    #
     try:
         for valdco in contour_list:
             # Get true depth limit by valdco:
@@ -314,9 +319,9 @@ def main(path, outpath, contourpath):
         exit()
 
 
-    # # # # # # # # # # # # # # # # # # # # # #
-    # Write contour limit raster using GDAL:  #
-    # # # # # # # # # # # # # # # # # # # # # #
+    #
+    # # Write contour limit raster using GDAL:
+    #
     try:
         print "\n\nExporting contour limits surface.."
         driver = gdal.GetDriverByName("GTiff")
@@ -347,7 +352,7 @@ def main(path, outpath, contourpath):
 
 
 #
-# Optional method, does part of the post-processing
+# Optional method, does part of the vector contour post-processing
 # This optional method depends on GeoPandas (see http://geopandas.org/)
 #
 def filter_contours(raw_contourpath, export_contourpath):
