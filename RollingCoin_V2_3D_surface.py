@@ -270,7 +270,7 @@ def main(inpath, outpath, radius, trim):
 trim = True     # Coin trim flag
 radius = 5     # Coin radius
 
-depth_model = R"C:\Users\L165912\Desktop\DEV_roll\Pietarsaari.tif"
-output_path = R"C:\Users\L165912\Desktop\DEV_roll\Pietarsaari_R5T.tif"
+depth_model = R"C:\Users\user\Desktop\test.tif"
+output_path = R"C:\Users\user\Desktop\test_out.tif"
 
 main(depth_model, output_path, radius, trim)
