@@ -30,7 +30,7 @@ except Exception:
 
 #
 # Buffers shoals by one cell in all directions
-# (3 x 3 cells max filter)
+# (Simply put: Focal 3 x 3 max filter)
 #
 def buffer_shoals(src_array, nodata):
     rows = src_array.shape[0]               # Number of rows
@@ -44,6 +44,9 @@ def buffer_shoals(src_array, nodata):
     # Loop trough cells:
     for row in range(rows):
         for col in range(columns):
+
+            # Reset max elevation to placeholder value
+            max_elev = placeholder
 
             if(row == 0):                   # Top row
                 if(col == 0):               # Top-left corner - 3 directions
@@ -147,7 +150,7 @@ def check_coin(coin, radius, array, index_row, index_col, rows, columns):
                         shoalest = array[index_row + row_coin][index_col + col_coin]
 
         if(shoalest != -99999.0):
-            return True, shoalest   # Return True and shoalest cell depth
+            return True, shoalest   # Return True & shoalest cell depth
         else:
             return False, 0         # Return False & 0
 
@@ -265,9 +268,9 @@ def main(inpath, outpath, radius, trim):
 #                       #
 
 trim = True     # Coin trim flag
-radius = 10     # Coin radius
+radius = 5     # Coin radius
 
-depth_model = R"C:\Users\user\Desktop\surface\example.tif"
-output_path = R"C:\Users\user\Desktop\surface\example_rolled.tif"
+depth_model = R"C:\Users\L165912\Desktop\DEV_roll\Pietarsaari.tif"
+output_path = R"C:\Users\L165912\Desktop\DEV_roll\Pietarsaari_R5T.tif"
 
 main(depth_model, output_path, radius, trim)
