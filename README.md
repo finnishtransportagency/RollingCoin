@@ -50,8 +50,8 @@ This version creates a manipulated 2.5 dimensional depth model surface. The meth
 4. Create __*Coin*__
 
 5. For each cell in original data array:
-    1. Find shoalest depth (*Zmax*) of neighborhood (*Coin*)
-    2. If *Zmax* is deeper than *export array* cell current depth:
+   - Find shoalest depth (*Zmax*) of neighborhood (*Coin*)
+   - If *Zmax* is deeper than *export array* cell current depth:
       - Write *Zmax* to whole *Coin* area in *export array* 
     
     *Note that the export array cell values can only get deeper from the initial value: the Coin is always trying to get maximum depth.*
