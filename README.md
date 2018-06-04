@@ -40,7 +40,7 @@ This version creates a manipulated 2.5 dimensional depth model surface. The meth
    - Get *georeferencing parameters*
    - Save input depth model data to a 2D NumPy array
    
-2. __*Apply a 3 * 3 cell focal maximum filter*__ to expand shoals by one cell to all directions
+2. *Apply a 3 * 3 cell focal maximum filter* to expand shoals by one cell to all directions
    - This will ensure navigational safety of raw contours (assuming the input depth model is safe for navigation)
    
 3. Create another 2D NumPy array to hold manipulated surface values
@@ -51,7 +51,7 @@ This version creates a manipulated 2.5 dimensional depth model surface. The meth
 
 5. *For each cell* in original data array:
    - Find shoalest depth (*Zmax*) of neighborhood (*Coin*)
-   - Write *Zmax* to *export array* cell __if__ *Zmax* is __deeper__ than current depth of *export array* cell
+   - Write *Zmax* to *export array* cell __if *Zmax* is deeper__ than current depth of *export array* cell
    - *Note that the export array cell values can only get deeper from the initial value: the Coin is always trying to get maximum depth.*
 
 6. Restore original *No Data* values to *export array*
