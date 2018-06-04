@@ -34,27 +34,25 @@ This version creates a manipulated 2.5 dimensional depth model surface. The meth
 - Script assumes input data to have *negative depths* below vertical reference level
 - In order to maintain the desired *Coin* shape it is recommended to have the input data in projected CRS and to use identical spatial resolution in both (x-, y-) directions
 
-#### Algorithm in a nutshell:
+### Algorithm in a nutshell:
 1. Open input depth model
    - Get original *No Data* value
    - Get *georeferencing parameters*
-   - Save depth model data to a 2D NumPy array
+   - Save input depth model data to a 2D NumPy array
    
-2. Apply a 3 * 3 cell focal maximum filter to expand shoals by one cell to all directions
+2. __*Apply a 3 * 3 cell focal maximum filter*__ to expand shoals by one cell to all directions
    - This will ensure navigational safety of raw contours (assuming the input depth model is safe for navigation)
    
 3. Create another 2D NumPy array to hold manipulated surface values
-   - Let's call this array __*"export array"*__
+   - We'll call this array __*"export array"*__
    - Initialize all *export array* cell values to 10000 (meters)
    
-4. Create __*Coin*__
+4. Create a __*Coin*__
 
-5. For each cell in original data array:
+5. *For each cell* in original data array:
    - Find shoalest depth (*Zmax*) of neighborhood (*Coin*)
-   - If *Zmax* is deeper than *export array* cell current depth:
-      - Write *Zmax* to whole *Coin* area in *export array* 
-    
-    *Note that the export array cell values can only get deeper from the initial value: the Coin is always trying to get maximum depth.*
+   - Write *Zmax* to *export array* cell __if__ *Zmax* is __deeper__ than current depth of *export array* cell
+   - *Note that the export array cell values can only get deeper from the initial value: the Coin is always trying to get maximum depth.*
 
 6. Restore original *No Data* values to *export array*
 
