@@ -127,7 +127,6 @@ def create_coin(radius, trim_flag):
 
     if(trim_flag == True):  
         return ret[1:-1, 1:-1]      # Return trimmed coin (removes extreme rows and columns)
-
     else:
         return ret                  # Return coin as is (no trimming)
 
@@ -269,7 +268,7 @@ def main(inpath, outpath, radius, trim):
 #                       #
 
 trim = True     # Coin trim flag
-radius = 5     # Coin radius
+radius = 5      # Coin radius
 
 depth_model = R"C:\Users\user\Desktop\test.tif"
 output_path = R"C:\Users\user\Desktop\test_out.tif"
