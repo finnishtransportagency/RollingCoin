@@ -30,20 +30,35 @@ This version creates a manipulated 2.5 dimensional depth model surface. The meth
 
 
 ## Basic functionality (V2):
-- *Coin* is a neighborhood matrix and can be of any shape and size
+- *Coin* is a 2 dimensional neighborhood matrix of boolean values and can be of any shape and size
 - Script assumes input data to have *negative depths* below vertical reference level
 - In order to maintain the desired *Coin* shape it is recommended to have the input data in projected CRS and to use identical spatial resolution in both (x-, y-) directions
 
-Algorithm in a nutshell:
-1. Open input depth model, get original *No Data* value, *georeferencing parameters* and save depth model data to a 2D NumPy array
+#### Algorithm in a nutshell:
+1. Open input depth model
+   - Get original *No Data* value
+   - Get *georeferencing parameters*
+   - Save depth model data to a 2D NumPy array
+   
 2. Apply a 3 * 3 cell focal maximum filter to expand shoals by one cell to all directions
-3. Create another 2D NumPy array (*"export array"*) to hold manipulated surface values and initialize all cell values to 10000 (meters)
-4. Create *Coin* (a 2D neighborhood matrix of boolean values)
+   - This will ensure navigational safety of raw contours (assuming the input depth model is safe for navigation)
+   
+3. Create another 2D NumPy array to hold manipulated surface values
+   - Let's call this array __*"export array"*__
+   - Initialize all *export array* cell values to 10000 (meters)
+   
+4. Create __*Coin*__
+
 5. For each cell in original data array:
     1. Find shoalest depth (*Zmax*) of neighborhood (*Coin*)
-    2. Write *Zmax* to whole coin area in *export array*. *Note that export array values can only get deeper. The Coin is trying to get maximum depth.*
-6. Restore original *No Data* values to export array
-7. Export modified surface to a file
+    2. If *Zmax* is deeper than *export array* cell current depth:
+      - Write *Zmax* to whole *Coin* area in *export array* 
+    
+    *Note that the export array cell values can only get deeper from the initial value: the Coin is always trying to get maximum depth.*
+
+6. Restore original *No Data* values to *export array*
+
+7. Export modified surface (*export array*) to a file
 
 
-### ReadMe is still work in progress.
+#### ReadMe is still work in progress.
