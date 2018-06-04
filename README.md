@@ -12,8 +12,8 @@ This version creates a manipulated 2.5 dimensional depth model surface. The meth
 
 ## Notes:
 - Written in Python (Python 2)
-- Provided scripts are simple proof-of-concept scripts, not fully developed production line tools
-- There is no user interface and the scripts are not guaranteed to work
+- *Provided scripts are simple proof-of-concept scripts, not fully developed production line tools*
+- There is *no user interface* and the *scripts are not guaranteed to work*
 - User should read the script sources carefully to get familiar with the method and the source code lines that one needs to modify before use
 
 
