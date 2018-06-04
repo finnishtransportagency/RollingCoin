@@ -18,12 +18,15 @@ This version creates a manipulated 2.5 dimensional depth model surface. The meth
 
 
 ### Dependencies:
-1. GDAL (see www.gdal.org)
-   * File I/O
-   * Contouring (optional, V1 only)
-2. NumPy (see www.numpy.org)
-   * Provides 2D arrays to store grid data
-3. (Optional, in V1 only: GeoPandas (see http://geopandas.org))
+1. GDAL
+   - See www.gdal.org
+   - File I/O
+   - Contouring (optional, V1 only)
+2. NumPy
+   - See www.numpy.org
+   - Provides 2D arrays to store grid data
+3. (Optional, in V1 only:) GeoPandas
+   - See http://geopandas.org
 
 
 
