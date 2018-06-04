@@ -34,7 +34,7 @@ This version creates a manipulated 2.5 dimensional depth model surface. The meth
 - Script assumes input data to have *negative depths* below vertical reference level
 - In order to maintain the desired *Coin* shape it is recommended to have the input data in projected CRS and to use identical spatial resolution in both (x-, y-) directions
 
-### Algorithm in a nutshell:
+#### Algorithm in a nutshell:
 1. Open input depth model
    - Get original *No Data* value
    - Get *georeferencing parameters*
@@ -57,6 +57,7 @@ This version creates a manipulated 2.5 dimensional depth model surface. The meth
 6. Restore original *No Data* values to *export array*
 
 7. Export modified surface (*export array*) to a file
+
 
 
 #### ReadMe is still work in progress.
