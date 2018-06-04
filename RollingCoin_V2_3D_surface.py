@@ -208,7 +208,8 @@ def main(inpath, outpath, radius, trim):
         data_array = numpy.array(data.GetRasterBand(1).ReadAsArray())
 
         # Create a new NumPy array to hold smooth surface:
-        dest_array = numpy.full((data_array.shape[0], data_array.shape[1]), 0, dtype = numpy.float32, order = "C")
+        initial_elevation = 10000
+        dest_array = numpy.full((data_array.shape[0], data_array.shape[1]), initial_elevation, dtype = numpy.float32, order = "C")
     
     except Exception:
         print "Error loading the data. Exiting."
